@@ -1,3 +1,5 @@
+
+# Convexity
 price <- function(irr, maturity, cRate = 0, cFreq = 1, VN = 10000){ 
   p = VN/(1+irr)^maturity
   if (cRate != 0) {
@@ -6,7 +8,6 @@ price <- function(irr, maturity, cRate = 0, cFreq = 1, VN = 10000){
     }}
   return(p)
 }
-
 
 irrs = seq(-0.06, 0.06, 0.0005)
 x1 = sapply(0.1 + irrs, price, maturity = 5, cRate = 0.12) / price(0.1, 5, 0.12) - 1
@@ -32,9 +33,7 @@ legend("topright", legend = c("YTM_0 = 10%,  5y  12%c", "YTM_0 = 10%, 30y 12%c",
 
 
 
-
-
-
+# Price fluctuation on zero-risk w/couponage
 tprice <- function(t = 0, irr, antiq, cRate = 0, cFreq = 1, VN = 10000){ 
   # t is months, antiq is yrs, cFreq is coupons per year
   p = VN/(1+irr)^(antiq - t/12)
@@ -42,7 +41,7 @@ tprice <- function(t = 0, irr, antiq, cRate = 0, cFreq = 1, VN = 10000){
     cRate = cRate / cFreq
     for (i in seq(12/cFreq, antiq * 12, 12/cFreq)){
       if(i >= t){
-        p = p + VN*cRate / (1+irr)^((i - t)/12)
+        p = p + VN*cRate / (1+irr)^((i - t)/12) 
       }
     }}
   return(p)
@@ -62,5 +61,5 @@ lines(ts, sapply(ts, tprice, irr = mktIRR, antiq = n, cRate = 0.1, cFreq = 2)/10
 lines(ts, rep(1,length(ts)), col = "grey", lty = 2)
 legend("topright", title = "Couponage", legend = c("0%", "3% semiannual", "5% semiannual", 
                                                    "10% semiannual"), 
-       col = c("grey", "orange", "red", "blue"), lty = 1)
-
+       col = c("grey", "orange", "red", "blue"), lty = 1,
+       cex = 0.7)
