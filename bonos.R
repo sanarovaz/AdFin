@@ -53,8 +53,7 @@ ts = seq(0,n*12)
 plot(ts, sapply(ts, tprice, irr = mktIRR, antiq = n, cRate = 0.05, cFreq = 1)/10000, 
      type="l", ylim = c(0,2), col = "red",
      xlab = "Aging (months)", ylab = "Price / NV",
-     main = "Bond price evolution\n (IRR = 5%)",
-     font.size = 2)
+     main = "Bond price evolution\n (IRR = 5%)")
 lines(ts, sapply(ts, tprice, irr = mktIRR, antiq = n)/10000, col = "darkgreen")
 lines(ts, sapply(ts, tprice, irr = mktIRR, antiq = n, cRate = 0.03, cFreq =  2)/10000, col = "orange")
 lines(ts, sapply(ts, tprice, irr = mktIRR, antiq = n, cRate = 0.1, cFreq = 2)/10000, col = "blue")
